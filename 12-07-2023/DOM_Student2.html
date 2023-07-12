@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dynamic Table</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        form {
+            margin-bottom: 20px;
+        }
+
+        .remove-button {
+            background-color: #ff5050;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <form id="myForm">
+        <label for="firstName">First Name:</label>
+        <input type="text" id="firstName" required><br>
+
+        <label for="lastName">Last Name:</label>
+        <input type="text" id="lastName" required><br>
+
+        <label for="id">ID:</label>
+        <input type="text" id="id" required><br>
+
+        <label for="country">Country:</label>
+        <input type="text" id="country" required><br>
+
+        <label for="city">City:</label>
+        <input type="text" id="city" required><br>
+
+        <button type="submit" onclick="addRecord(event)">Submit</button>
+    </form>
+
+    <table id="recordTable">
+        <thead>
+            <tr>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>ID</th>
+                <th>Country</th>
+                <th>City</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody id="recordTableBody">
+        </tbody>
+    </table>
+
+    <script>
+        function addRecord(event) {
+            event.preventDefault();
+
+            var firstName = document.getElementById("firstName").value;
+            var lastName = document.getElementById("lastName").value;
+            var id = document.getElementById("id").value;
+            var country = document.getElementById("country").value;
+            var city = document.getElementById("city").value;
+
+            var table = document.getElementById("recordTableBody");
+
+            var newRow = table.insertRow(table.rows.length);
+
+            var cell1 = newRow.insertCell(0);
+            var cell2 = newRow.insertCell(1);
+            var cell3 = newRow.insertCell(2);
+            var cell4 = newRow.insertCell(3);
+            var cell5 = newRow.insertCell(4);
+            var cell6 = newRow.insertCell(5);
+
+            cell1.innerHTML = firstName;
+            cell2.innerHTML = lastName;
+            cell3.innerHTML = id;
+            cell4.innerHTML = country;
+            cell5.innerHTML = city;
+            cell6.innerHTML = '<button class="remove-button" onclick="removeRecord(this)">Remove</button>';
+
+            document.getElementById("myForm").reset();
+        }
+
+        function removeRecord(button) {
+            var row = button.parentNode.parentNode;
+            row.parentNode.removeChild(row);
+        }
+    </script>
+</body>
+</html>
